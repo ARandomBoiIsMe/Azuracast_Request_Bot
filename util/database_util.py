@@ -5,8 +5,7 @@ from util.logging_util import get_logger
 
 LOGGER = get_logger(__name__)
 
-# This ensures that only one thread can
-# write/commit changes to the database at a time.
+# This ensures that only one thread can write/commit changes to the database at a time.
 # Gotta avoid those race conditions.
 DB_LOCK = threading.Lock()
 
