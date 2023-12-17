@@ -29,9 +29,6 @@ def connect_to_db():
 
         raise
 
-# --------------------------------------------
-# CRUD operations for managing approved users.
-# --------------------------------------------
 def insert_processed_comment(connection, comment_id):
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM processed_comments WHERE comment_id = ?", (comment_id,))
@@ -48,7 +45,7 @@ def retrieve_processed_comments(connection):
 
     return cursor.fetchall()
 
-def remove_approved_user(connection, comment_id):
+def remove_processed_comment(connection, comment_id):
     with DB_LOCK:
         connection.execute("DELETE FROM processed_comments WHERE comment_id = ?", (comment_id,))
         connection.commit()

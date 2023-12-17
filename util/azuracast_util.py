@@ -20,13 +20,13 @@ def send_request(base_url, station_id, song_request):
     if isinstance(requestable_songs, AzuracastError):
         return requestable_songs
 
-    song_artist = song_request.split('-')[0].strip()
-    song_title = song_request.split('-')[1].strip()
+    song_artist = song_request.split('-')[0].strip().lower()
+    song_title = song_request.split('-')[1].strip().lower()
 
     for song_obj in requestable_songs:
         if (
-            song_title == song_obj['song']['title'].strip() and
-            song_artist == song_obj['song']['artist'].strip()
+            song_title == song_obj['song']['title'].strip().lower() and
+            song_artist == song_obj['song']['artist'].strip().lower()
             ):
             with requests.post(f"{base_url}/station/{station_id}/request/{song_obj['request_id']}") as response:
                 if response.status_code != 200:

@@ -44,9 +44,3 @@ if __name__ == '__main__':
 
         LOGGER.info(f'Sleeping for about {MINUTES} minute(s)...')
         time.sleep(SLEEP_DURATION)
-
-# Add database to store processed comments - Done
-# Improve logic and error handling for commands - Done
-# Add logging - Done
-# MAYBE, add threading/async
-# Add more descriptive/specific errors for azuracast request function - Done
