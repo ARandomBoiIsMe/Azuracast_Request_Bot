@@ -44,7 +44,7 @@ def retrieve_processed_comments(connection):
 
     return cursor.fetchall()
 
-def remove_processed_comments(connection, comment_id):
+def remove_processed_comment(connection, comment_id):
     with DB_LOCK:
         connection.execute("DELETE FROM processed_comments WHERE comment_id = ?", (comment_id,))
         connection.commit()
