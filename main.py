@@ -43,4 +43,5 @@ if __name__ == '__main__':
             LOGGER.error(f"An error occurred: {e}")
 
         LOGGER.info(f'Sleeping for about {MINUTES} minute(s)...')
+
         time.sleep(SLEEP_DURATION)
