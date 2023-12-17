@@ -29,8 +29,6 @@ Program that checks for song requests from a specific Reddit post's comment sect
   ```
 
 ## Running the script
-Replace 'C:\path\to\the\main.py' with the actual path to the main.py script.  
-You can run it as an hourly task (Windows):  
   ```
   python main.py
   ```
