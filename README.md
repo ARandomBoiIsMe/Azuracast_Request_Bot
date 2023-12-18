@@ -42,4 +42,3 @@ The bot accepts these commands:
 
 ## Extra Information
 The bot only listens for top-level comments. Replies will be ignored.  
-The bot listens for comments every two minutes.
