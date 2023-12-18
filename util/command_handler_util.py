@@ -4,7 +4,7 @@ from util.logging_util import get_logger
 
 LOGGER = get_logger(__name__)
 
-COMMAND_LIST = ['request', 'list', 'help']
+COMMAND_LIST = ['request', 'list', 'help', 'nowplaying']
 
 def process_comment(comment, base_url, station_id, db_connection):
     if comment.body[0] != '!':
@@ -32,6 +32,9 @@ def process_comment(comment, base_url, station_id, db_connection):
 
     elif command == 'help':
         display_help_text(comment)
+
+    elif command == 'nowplaying':
+        display_now_playing(comment, base_url)
 
     database_util.insert_processed_comment(db_connection, comment.id)
 
@@ -96,3 +99,27 @@ def display_help_text(comment):
     comment.reply(general_util.generate_help_text())
 
     LOGGER.info('Help text displayed.')
+
+def display_now_playing(comment, base_url):
+    current_song_response = azuracast_util.get_nowplaying(base_url)
+    if isinstance(current_song_response, AzuracastError):
+        comment.reply('Unable to fetch currently playing song at the moment. Please try again later.')
+
+        LOGGER.error(f"Now Playing Fetch Error: {current_song_response.description}")
+
+        return
+    
+    station_name = current_song_response[0]['station']['name']
+    song_artist = current_song_response[0]['now_playing']['song']['artist']
+    song_title = current_song_response[0]['now_playing']['song']['title']
+
+    response_message = f"Now Playing at {station_name}: \n\n"
+    response_message += '&#x200B;\n\n'
+    response_message += '|Song Artist|Song Title|\n'
+    response_message += '|:-|:-|\n'
+    response_message += f'|{song_artist}|{song_title}|\n'
+    response_message += '\n&#x200B;'
+
+    comment.reply(response_message)
+
+    LOGGER.info(f"Currently Playing Song displayed.")

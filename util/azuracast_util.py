@@ -35,3 +35,10 @@ def send_request(base_url, station_id, song_request):
             return True
         
     return AzuracastError(ErrorType.SongIsNotRequestable, 'This song cannot be requested.')
+
+def get_nowplaying(base_url):
+    with requests.get(f'{base_url}/nowplaying') as response:
+        if response.status_code != 200:
+            return AzuracastError(ErrorType.FailedToFetchCurrentlyPlayingSong, response.text)
+        
+        return response.json()

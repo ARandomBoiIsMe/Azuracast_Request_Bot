@@ -5,7 +5,8 @@ class ErrorType(Enum):
     FailedToRequestSong = 2
     FailedToFetchRequestableSongs = 3
     FailedToFetchStations = 4
-    UnexpectedError = 5
+    FailedToFetchCurrentlyPlayingSong = 5
+    UnexpectedError = 6
 
 class AzuracastError:
     def __init__(self, type: ErrorType, description: str):
