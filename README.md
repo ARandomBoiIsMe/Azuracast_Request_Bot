@@ -37,7 +37,8 @@ Program that checks for song requests from a specific Reddit post's comment sect
 The bot accepts these commands:  
 - !request - Sends a request to the Azuracast Radio. Ex: !request Beatles - A Day In The Life
 - !help - Displays valid instructions. Ex: !help
-- !list - Displays list of requestable songs on the radio station. It displays them in batches. Ex: !list 1 OR !list 2 OR !list 3
+- !list - Displays list of requestable songs on the radio station, in batches. Ex: !list 1 OR !list 2 OR !list 3
+- !nowplaying - Displays currently playing song. Ex: !nowplaying
 
 ## Extra Information
 The bot only listens for top-level comments. Replies will be ignored.  

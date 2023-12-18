@@ -3,9 +3,10 @@ def generate_help_text():
 
     message += '|Command|Description|Usage|Example|\n'
     message += '|:-|:-|:-|:-|\n'
+    message += '|!help|Displays this help message|!help|-|\n'
     message += '|!request|Makes a song request|!request {song_artist} - {song_title}|!request Beatles - A Day In Time|\n'
     message += '|!list|Displays batches of requestable songs|!list {index}|!list 1|\n'
-    message += '|!help|Displays this help message|!help|-|\n\n'
+    message += '|!nowplaying|Displays the currently playing song|!nowplaying|-|\n\n'
     
     message += '&#x200B;'
 
