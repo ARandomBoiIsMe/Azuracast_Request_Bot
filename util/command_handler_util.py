@@ -4,25 +4,12 @@ from util.logging_util import get_logger
 
 LOGGER = get_logger(__name__)
 
-COMMAND_LIST = ['request', 'list', 'help', 'nowplaying']
-
 def process_comment(comment, base_url, station_id, db_connection):
     if comment.body[0] != '!':
         LOGGER.info('Irrelevant comment.')
         return
     
     command = comment.body.split('!')[1].split(' ')[0].strip()
-    if command not in COMMAND_LIST:
-        help_text = general_util.generate_help_text()
-        comment.reply(f"Invalid command '{command}'. Please use the correct command format.\n\n{help_text}")
-
-        LOGGER.info(f"Invalid command '{command}'.")
-
-        database_util.insert_processed_comment(db_connection, comment.id)
-
-        LOGGER.info(f'Comment has been added to database - {comment.id}: {comment.author.name} - {comment.body}')
-
-        return
     
     if command == 'request':
         handle_request(comment, base_url, station_id)
@@ -35,6 +22,9 @@ def process_comment(comment, base_url, station_id, db_connection):
 
     elif command == 'nowplaying':
         display_now_playing(comment, base_url)
+
+    else:
+        handle_invalid_command(comment)
 
     database_util.insert_processed_comment(db_connection, comment.id)
 
@@ -123,3 +113,9 @@ def display_now_playing(comment, base_url):
     comment.reply(response_message)
 
     LOGGER.info(f"Currently Playing Song displayed.")
+
+def handle_invalid_command(command, comment):
+    help_text = general_util.generate_help_text()
+    comment.reply(f"Invalid command '{command}'. Please use the correct command format.\n\n{help_text}")
+
+    LOGGER.info(f"Invalid command '{command}'.")
